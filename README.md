@@ -10,7 +10,6 @@ This project provides an end-to-end workflow to convert IMF Excel tables into a 
 - Modular scripts for easy modification and expansion
 
 ## Repository Structure
-.
 ├── creating_database.py  – Loads Excel files, builds SQLite database, generates schema summary  
 ├── imf_nlqa.py           – Natural language → SQL → Answer pipeline  
 ├── run_pipeline.py       – Runs the full workflow end to end  
