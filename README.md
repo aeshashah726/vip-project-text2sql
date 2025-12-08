@@ -74,6 +74,18 @@ OPENAI_API_KEY=your-key-here
 
 ## Running the Pipeline
 
+### Quick Start
+
+```bash
+# 1. Build the database
+python creating_database.py
+
+# 2. Ask a natural-language question
+python imf_nlqa.py
+
+# 3. Or run everything end-to-end
+python run_pipeline.py
+
 ### A. Build the SQLite Database
 
 ```bash
@@ -179,6 +191,30 @@ rm imf_data.db
 python creating_database.py
 ```
 
+### Pipeline can't find the IMF database (`imf_data.db`)
+
+If you get errors like "file not found", "no such table", or "database does not exist", check these:
+
+1. Make sure `creating_database.py` was run successfully.
+   It must finish without errors and produce `imf_data.db` in the project directory.
+
+2. Confirm that all Excel files are inside the `imf_tables/` folder.
+   The folder must exist and contain valid `.xlsx` files.
+
+3. Ensure your Python working directory is the project root.
+   For example, if you're in VS Code, run:
+       `pwd`  (Mac/Linux)
+       `cd`   (Windows PowerShell)
+   You should see the folder containing `creating_database.py`.
+
+4. Install Excel parsing libraries:
+       pip install openpyxl xlrd
+
+5. Delete and rebuild the database if it becomes corrupted:
+       rm imf_data.db   (Mac/Linux)
+       del imf_data.db  (Windows)
+       python creating_database.py
+
 ### Excel parsing issues
 Install common parsing engines:
 
@@ -194,6 +230,73 @@ echo $OPENAI_API_KEY
 ```
 
 ---
+
+**### Example Output
+**
+Below are sample interactions showing how the system handles natural-language questions, generates SQL using Ollama, and returns final answers based on the IMF SQLite database.
+
+Example 1 — Money Supply (M2) Comparison
+
+Question
+
+Compare India and China’s money supply (M2) in 2018.
+
+
+Pipeline Output (abridged)
+
+Sending request to Ollama… this may take a minute or two for complex queries.
+STATUS: 200
+Sending request to Ollama… this may take a minute or two for complex queries.
+STATUS: 200
+
+
+Final Answer
+According to the IMF data, in 2018:
+
+India’s M2 money supply was approximately 11.35 trillion USD
+
+China’s M2 money supply was approximately 32.85 trillion USD
+
+Generated SQL
+
+SELECT
+    Country,
+    M2
+FROM imf_data
+WHERE Year = 2018
+  AND Country IN ('India', 'China')
+ORDER BY Country;
+
+Example 2 — Highest Median GDP Growth (2010–2020)
+
+Question
+
+Which country had the highest median GDP growth rate in the last decade?
+
+
+Pipeline Output
+
+Sending request to Ollama… this may take a minute or two for complex queries.
+STATUS: 200
+Sending request to Ollama… this may take a minute or two for complex queries.
+STATUS: 200
+
+
+Final Answer
+Based on the IMF data, the country with the highest median GDP growth rate from 2010–2020 is Qatar, with a median growth rate of 6.3%.
+
+Generated SQL
+
+SELECT
+    country_name,
+    AVG(gdp_growth_rate) AS median_gdp_growth_rate
+FROM imf_data
+WHERE year BETWEEN 2010 AND 2020
+GROUP BY country_name
+ORDER BY median_gdp_growth_rate DESC
+LIMIT 1;
+
+
 
 ## License
 This project is provided *as-is*. Ensure compliance with IMF data usage rules and API terms.
