@@ -7,7 +7,7 @@ from openai import OpenAI
 # SETTINGS
 #############################################
 
-DB_PATH = "pranati_imf_data.db"
+DB_PATH = "imf_data.db"
 
 # FORCE OPENAI OFF (no more quota errors)
 os.environ["OPENAI_API_KEY"] = ""
@@ -214,3 +214,4 @@ if __name__ == "__main__":
     print("\nQuestion:", q)
     print("Answer:")
     print(ask_imf(q))
+
