@@ -235,30 +235,32 @@ echo $OPENAI_API_KEY
 
 Below are sample interactions showing how the system handles natural-language questions, generates SQL using Ollama, and returns final answers based on the IMF SQLite database.
 
-Example 1 — Money Supply (M2) Comparison
+#### Example 1 — Money Supply (M2) Comparison
 
 Question
-
+```
 Compare India and China’s money supply (M2) in 2018.
-
+```
 
 Pipeline Output (abridged)
-
+```
 Sending request to Ollama… this may take a minute or two for complex queries.
 STATUS: 200
 Sending request to Ollama… this may take a minute or two for complex queries.
 STATUS: 200
-
+```
 
 Final Answer
+```
 According to the IMF data, in 2018:
 
 India’s M2 money supply was approximately 11.35 trillion USD
 
 China’s M2 money supply was approximately 32.85 trillion USD
+```
 
 Generated SQL
-
+```
 SELECT
     Country,
     M2
@@ -266,27 +268,30 @@ FROM imf_data
 WHERE Year = 2018
   AND Country IN ('India', 'China')
 ORDER BY Country;
+```
 
-Example 2 — Highest Median GDP Growth (2010–2020)
+#### Example 2 — Highest Median GDP Growth (2010–2020)
 
 Question
-
+```
 Which country had the highest median GDP growth rate in the last decade?
-
+```
 
 Pipeline Output
-
+```
 Sending request to Ollama… this may take a minute or two for complex queries.
 STATUS: 200
 Sending request to Ollama… this may take a minute or two for complex queries.
 STATUS: 200
-
+```
 
 Final Answer
+```
 Based on the IMF data, the country with the highest median GDP growth rate from 2010–2020 is Qatar, with a median growth rate of 6.3%.
+```
 
 Generated SQL
-
+```
 SELECT
     country_name,
     AVG(gdp_growth_rate) AS median_gdp_growth_rate
@@ -295,6 +300,7 @@ WHERE year BETWEEN 2010 AND 2020
 GROUP BY country_name
 ORDER BY median_gdp_growth_rate DESC
 LIMIT 1;
+```
 
 
 
