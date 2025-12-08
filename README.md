@@ -99,6 +99,7 @@ You will be prompted:
 ```
 Enter your question:
 ```
+Here is our list of query templates: https://docs.google.com/spreadsheets/d/1PbC8GyBNfBSMvDZnbVjTVLorU41SzH8-p8y62U-Xl8Q/edit?usp=sharing
 
 The system will then:
 
