@@ -30,7 +30,7 @@ This project provides an end-to-end workflow to convert IMF Excel tables into a 
 
 ### Required packages
 - pandas  
-- sqlalchemy  
+- sqlalchemy
 - openai  
 - python-dotenv  
 
@@ -53,7 +53,7 @@ Create the folder and place all IMF `.xlsx` files inside:
 imf_tables/
 ```
 
-### 2. Set Your OpenAI API Key
+### 2. Set Your OpenAI API Key or Configure Ollama model
 
 **macOS/Linux**
 ```bash
@@ -68,6 +68,11 @@ setx OPENAI_API_KEY "your-key-here"
 **Or create a `.env` file:**
 ```
 OPENAI_API_KEY=your-key-here
+```
+
+If using Ollama, configure which model will be used:
+```
+"model": "llama3.1:latest"
 ```
 
 ---
