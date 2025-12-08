@@ -231,8 +231,7 @@ echo $OPENAI_API_KEY
 
 ---
 
-**### Example Output
-**
+**### Example Output**
 Below are sample interactions showing how the system handles natural-language questions, generates SQL using Ollama, and returns final answers based on the IMF SQLite database.
 
 Example 1 — Money Supply (M2) Comparison
