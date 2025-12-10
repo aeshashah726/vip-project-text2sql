@@ -1,5 +1,5 @@
 import os
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = # <--- ADD YOUR KEY HERE
 import sqlite3
 import pandas as pd
 from openai import OpenAI
@@ -7,7 +7,7 @@ from openai import OpenAI
 ###########################################
 # 0. Set API Key
 ###########################################
-os.environ["OPENAI_API_KEY"] = "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"   # <--- ADD YOUR KEY HERE
+os.environ["OPENAI_API_KEY"] = # <--- ADD YOUR KEY HERE
 ###########################################
 # 1. Connect to your existing IMF database
 ###########################################
@@ -108,3 +108,4 @@ if __name__ == "__main__":
     result = run_sql(sql)
     print("\nQuery Result:")
     print(result)
+
